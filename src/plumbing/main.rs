@@ -238,6 +238,14 @@ pub fn main() -> Result<()> {
                         core::index::verify(index_path, out, core::index::Options { object_hash, format })
                     },
                 ),
+                free::index::Subcommands::ReadTree { force, id, path } => prepare_and_run(
+                    "index-read-tree",
+                    verbose,
+                    progress,
+                    progress_keep_open,
+                    None,
+                    move |_progress, _out, err| core::index::read_tree(id, path, force, repository(Mode::Strict)?, err),
+                ),
             },
             free::Subcommands::Mailmap {
                 cmd: free::mailmap::Platform { path, cmd },

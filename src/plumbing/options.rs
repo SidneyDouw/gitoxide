@@ -310,6 +310,17 @@ pub mod free {
             Verify,
             /// Print all entries to standard output
             Entries,
+            /// Writes an index file from a tree object to the specified location
+            ReadTree {
+                /// Overwrite the specified file if it already exists
+                #[clap(long, short = 'f')]
+                force: bool,
+                /// Hash of the tree object to generate the index from
+                // TODO: use Prefix instead ObjectId
+                id: git_repository::hash::ObjectId,
+                /// Path to the index file to be written
+                path: PathBuf,
+            },
             /// Print information about the index structure
             Info {
                 /// Do not extract specific extension information to gain only a superficial idea of the index's composition.
